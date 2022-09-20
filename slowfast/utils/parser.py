@@ -64,7 +64,7 @@ def parse_args():
     return parser.parse_args()
 
 
-def load_config(args, path_to_config=None):
+def load_config(path_to_config=None):
     """
     Given the arguemnts, load and initialize the configs.
     Args:
@@ -77,18 +77,18 @@ def load_config(args, path_to_config=None):
     if path_to_config is not None:
         cfg.merge_from_file(path_to_config)
     # Load config from command line, overwrite config from opts.
-    if args.opts is not None:
-        cfg.merge_from_list(args.opts)
+    # if args.opts is not None:
+    #     cfg.merge_from_list(args.opts)
 
     # Inherit parameters from args.
-    if hasattr(args, "num_shards") and hasattr(args, "shard_id"):
-        cfg.NUM_SHARDS = args.num_shards
-        cfg.SHARD_ID = args.shard_id
-    if hasattr(args, "rng_seed"):
-        cfg.RNG_SEED = args.rng_seed
-    if hasattr(args, "output_dir"):
-        cfg.OUTPUT_DIR = args.output_dir
+    # if hasattr(args, "num_shards") and hasattr(args, "shard_id"):
+    #     cfg.NUM_SHARDS = args.num_shards
+    #     cfg.SHARD_ID = args.shard_id
+    # if hasattr(args, "rng_seed"):
+    #     cfg.RNG_SEED = args.rng_seed
+    # if hasattr(args, "output_dir"):
+    #     cfg.OUTPUT_DIR = args.output_dir
 
-    # Create the checkpoint dir.
-    cu.make_checkpoint_dir(cfg.OUTPUT_DIR)
+    # # Create the checkpoint dir.
+    # cu.make_checkpoint_dir(cfg.OUTPUT_DIR)
     return cfg
